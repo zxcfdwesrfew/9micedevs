@@ -9,7 +9,7 @@ local startTime = 12 -- Начало активации
 local endTime = 18   -- Конец активации
 
 -- Правильный ключ для активации
-local correctKey = "секретный_ключ"
+local correctKey = "32323"
 
 -- Функция для проверки времени
 local function isInTimeRange()
