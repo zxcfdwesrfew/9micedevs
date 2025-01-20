@@ -8,9 +8,6 @@ screenGui.Parent = player:WaitForChild("PlayerGui")
 local startTime = 12 -- Начало активации
 local endTime = 18   -- Конец активации
 
--- Правильный ключ для активации
-local correctKey = "32323"
-
 -- Функция для проверки времени
 local function isInTimeRange()
     local currentTime = os.date("*t").hour
@@ -37,38 +34,15 @@ titleLabel.TextStrokeTransparency = 0.6
 titleLabel.TextStrokeColor3 = Color3.fromRGB(0, 255, 255)
 titleLabel.Parent = menuFrame
 
--- Поле для ввода ключа
-local keyInputFrame = Instance.new("Frame")
-keyInputFrame.Size = UDim2.new(0, 380, 0, 100)
-keyInputFrame.Position = UDim2.new(0.5, -190, 0.5, -200)
-keyInputFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-keyInputFrame.Parent = screenGui
-
-local keyLabel = Instance.new("TextLabel")
-keyLabel.Size = UDim2.new(1, 0, 0, 30)
-keyLabel.Text = "Введите ключ для активации"
-keyLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-keyLabel.BackgroundTransparency = 1
-keyLabel.TextSize = 20
-keyLabel.Parent = keyInputFrame
-
-local keyInput = Instance.new("TextBox")
-keyInput.Size = UDim2.new(1, 0, 0, 40)
-keyInput.Position = UDim2.new(0, 0, 0, 40)
-keyInput.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-keyInput.TextColor3 = Color3.fromRGB(0, 0, 0)
-keyInput.PlaceholderText = "Введите ключ"
-keyInput.TextSize = 18
-keyInput.Parent = keyInputFrame
-
-local keyActivateButton = Instance.new("TextButton")
-keyActivateButton.Size = UDim2.new(1, 0, 0, 40)
-keyActivateButton.Position = UDim2.new(0, 0, 0, 80)
-keyActivateButton.Text = "Активировать меню"
-keyActivateButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-keyActivateButton.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
-keyActivateButton.TextSize = 18
-keyActivateButton.Parent = keyInputFrame
+-- Кнопка для активации меню
+local activateButton = Instance.new("TextButton")
+activateButton.Size = UDim2.new(0, 380, 0, 50)
+activateButton.Position = UDim2.new(0.5, -190, 0.5, -150)
+activateButton.Text = "Активировать меню"
+activateButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+activateButton.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
+activateButton.TextSize = 20
+activateButton.Parent = screenGui
 
 -- Плавное появление меню
 local function showMenu()
@@ -76,13 +50,13 @@ local function showMenu()
     menuFrame:TweenSize(UDim2.new(0, 400, 0, 600), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.5, true)
 end
 
--- Проверка правильности ключа и времени
-keyActivateButton.MouseButton1Click:Connect(function()
-    if keyInput.Text == correctKey and isInTimeRange() then
-        keyInputFrame.Visible = false
+-- Проверка времени и активация меню
+activateButton.MouseButton1Click:Connect(function()
+    if isInTimeRange() then
         showMenu()
+        print("Меню активировано! Время подходящее.")
     else
-        keyInput.Text = "Неверный ключ или время не подходит!"
+        print("Время не подходит для активации меню.")
     end
 end)
 
